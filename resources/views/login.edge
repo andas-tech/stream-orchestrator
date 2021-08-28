@@ -1,0 +1,17 @@
+@layout('layouts/base')
+@set('title', 'Login')
+@section('body')
+<section class="hero">
+  <div class="hero-body columns is-centered">
+    <div class="column is-3">
+      <form>
+        <input type="text" class="input" placeholder="username" />
+        <input type="password" class="input" placeholder="password" />
+        <label id="login">
+          <button class="button is-primary column is-full">Login</button>
+        </label>
+      </form>
+    </div>
+  </div>
+</section>
+@end
