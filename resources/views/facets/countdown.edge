@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown</title>
+  <style>
+    body {
+      background: transparent;
+    }
+    div {
+      background: transparent;
+    }
+    .counter {
+      font-size: 5em;
+      font-family: sans-serif;
+      color: #cccccc;
+    }
+  </style>
+</head>
+
+<body>
+<span id="counter" class="counter"></span>
+</body>
+
+<script type="application/javascript">
+  const padTimeInteger = (val) => {
+    if (val < 10) {
+      return "0" + val
+    } else {
+      return val
+    }
+  }
+
+  const DEFAULT_BREAK_DURATION_MINUTES = 3;
+
+  const countdownContainer = document.getElementById("counter");
+  const params = new URLSearchParams(window.location.search);
+  const queryMinutes = params.get("minutes") ?? DEFAULT_BREAK_DURATION_MINUTES;
+  const target = Date.now() + (queryMinutes * 1000)
+  countdownContainer.innerHTML = padTimeInteger(queryMinutes) + ":00";
+
+  const countdown = (target) => {
+    setInterval(() => {
+      const duration = target - Date.now();
+      const minutes = padTimeInteger(Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60)));
+      const seconds = padTimeInteger(Math.floor((duration % (1000 * 60)) / 1000));
+
+      if (duration < 1) {
+        countdownContainer.innerText = 'Be right back!'
+      } else {
+        countdownContainer.innerHTML = minutes + ":" + seconds;
+      }
+
+    }, 1000)
+  };
+
+  countdown(target)
+
+</script>
+</html>
